@@ -1,0 +1,15 @@
+C:\Users\Julius\source\repos\ILaboratoryAPI\LabAPI\bin\Debug\LabAPI.dll
+C:\Users\Julius\source\repos\ILaboratoryAPI\LabAPI\bin\Debug\LabAPI.pdb
+C:\Users\Julius\source\repos\ILaboratoryAPI\LabAPI\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Julius\source\repos\ILaboratoryAPI\LabAPI\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Julius\source\repos\ILaboratoryAPI\LabAPI\bin\Debug\System.Web.Http.dll
+C:\Users\Julius\source\repos\ILaboratoryAPI\LabAPI\bin\Debug\System.Web.Http.WebHost.dll
+C:\Users\Julius\source\repos\ILaboratoryAPI\LabAPI\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Julius\source\repos\ILaboratoryAPI\LabAPI\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Julius\source\repos\ILaboratoryAPI\LabAPI\bin\Debug\System.Web.Http.xml
+C:\Users\Julius\source\repos\ILaboratoryAPI\LabAPI\bin\Debug\System.Web.Http.WebHost.xml
+C:\Users\Julius\source\repos\ILaboratoryAPI\LabAPI\obj\Debug\LabAPI.csprojAssemblyReference.cache
+C:\Users\Julius\source\repos\ILaboratoryAPI\LabAPI\obj\Debug\LabAPI.csproj.CoreCompileInputs.cache
+C:\Users\Julius\source\repos\ILaboratoryAPI\LabAPI\obj\Debug\LabAPI.csproj.CopyComplete
+C:\Users\Julius\source\repos\ILaboratoryAPI\LabAPI\obj\Debug\LabAPI.dll
+C:\Users\Julius\source\repos\ILaboratoryAPI\LabAPI\obj\Debug\LabAPI.pdb
