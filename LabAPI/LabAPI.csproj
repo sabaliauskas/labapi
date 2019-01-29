@@ -61,7 +61,7 @@
     <Compile Include="DTOs\PatientDto.cs" />
     <Compile Include="DTOs\TestsDto.cs" />
     <Compile Include="ILaboratory.cs" />
-    <Compile Include="Methods\Methods.cs" />
+    <Compile Include="Methods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

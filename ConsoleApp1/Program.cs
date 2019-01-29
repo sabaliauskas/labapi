@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using LabAPI.DTOs;
+using LabAPI;
 using LabAPI.Methods;
 
 
@@ -14,9 +15,6 @@ namespace ConsoleApp1
       string password = "foxuslab_n0t4r4nd0mp4ss";
 
       var testas = new Methods();
-      testas.GetClassifiers(username,password);
-      testas.GetOrdered(username,password);
-
 
       var Patient = new PatientDto
       {
@@ -33,7 +31,9 @@ namespace ConsoleApp1
         new TestsDto {Classifier_Id = 2}
       };
 
-      testas.CreateOrder(username, password, Patient, testIDs);
+      ((ILabotatory)testas).GetClassifiers(username,password);
+      ((ILabotatory)testas).GetOrdered(username, password);
+      ((ILabotatory)testas).CreateOrder(username,password,Patient,testIDs);
 
       Console.ReadLine();
     }

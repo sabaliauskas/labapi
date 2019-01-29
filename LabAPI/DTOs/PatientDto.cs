@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-namespace LabAPI.DTOs
+﻿namespace LabAPI.DTOs
 {
   public class PatientDto
   {

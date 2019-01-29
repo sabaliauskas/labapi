@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
 
 namespace LabAPI.DTOs
 {
@@ -13,8 +9,10 @@ namespace LabAPI.DTOs
     public string Surname { get; set; }
     public string Bday { get; set; }
     public int Sex { get; set; }
-    public List<TestsDto> Classifiers { get; set; }
-      
- }
-}
+    public IList<TestsDto> Classifiers { get; set; }
+
+
+  }
+  }
+
   

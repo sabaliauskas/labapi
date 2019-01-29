@@ -1,75 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using LabAPI.DTOs;
 using Newtonsoft.Json;
 
 namespace LabAPI.Methods
 {
-  public class Methods
-
+  public class Methods : ILabotatory
+    
   {
-    public async void GetClassifiers(string username, string password)
+
+    TestsDto ILabotatory.GetClassifiers(string username, string password)
     {
-      var url = "https://staging.lyg.io/api/classifiers";
-      var encoded = Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes(username + ":" + password));
-      var request = (HttpWebRequest) WebRequest.Create(url);
-      request.Headers.Add("Authorization", "Basic " + encoded);
-      using (var response = (HttpWebResponse) await request.GetResponseAsync())
-      using (var stream = response.GetResponseStream())
-      using (var reader = new StreamReader(stream))
+      using (HttpClient httpClient = new HttpClient())
       {
-        var jsonString = await reader.ReadToEndAsync();
-        var jsonToObjects = JsonConvert.DeserializeObject<IEnumerable<TestsDto>>(jsonString);
+        var url = "https://staging.lyg.io/api/classifiers";
+        var encoded = Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes(username + ":" + password));
+        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", encoded);
+        var response = httpClient.GetAsync(url).GetAwaiter().GetResult();
+        var result = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+        IEnumerable<TestsDto> jsonToObjects = JsonConvert.DeserializeObject<IEnumerable<TestsDto>>(result);
+        //return jsonToObjects; //NEVEIKIA?
+        return null;
       }
     }
 
-    public async void GetOrdered(string username, string password)
+    public IList<OrderDto> GetOrdered(string username, string password)
     {
-      var url = "https://staging.lyg.io/api/orders";
-      var encoded = Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes(username + ":" + password));
-      var request = (HttpWebRequest) WebRequest.Create(url);
-      request.Headers.Add("Authorization", "Basic " + encoded);
-      using (var response = (HttpWebResponse) await request.GetResponseAsync())
-      using (var stream = response.GetResponseStream())
-      using (var reader = new StreamReader(stream))
+      using (HttpClient httpClient = new HttpClient())
       {
-        var jsonString = await reader.ReadToEndAsync();
-        var jsonToObjects = JsonConvert.DeserializeObject<IEnumerable<OrderDto>>(jsonString);
+        var url = "https://staging.lyg.io/api/orders";
+        var encoded = Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes(username + ":" + password));
+        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", encoded);
+        var response = httpClient.GetAsync(url).GetAwaiter().GetResult();
+        var result = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+        IEnumerable<OrderDto> jsonToObjects = JsonConvert.DeserializeObject<IEnumerable<OrderDto>>(result);
+        //return jsonToObjects; //NEVEIKIA
+        return null;
       }
     }
 
-    public async void CreateOrder(string username, string password, PatientDto patientInfo,
-      List<TestsDto> testIDs)
+    public OrderedDto CreateOrder(string username, string password, PatientDto patientInfo, IList<TestsDto> testIDs)
     {
-      var url = "https://staging.lyg.io/api/order";
-      var encoded = Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes(username + ":" + password));
-
-      using (var httpClient = new HttpClient())
+      using (HttpClient httpClient = new HttpClient())
       {
-        using (var request = new HttpRequestMessage(new HttpMethod("POST"), url))
+        var url = "https://staging.lyg.io/api/order";
+        var encoded = Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes(username + ":" + password));
+        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", encoded);
+
+        var OrderDetails = new OrderedDto
         {
-          request.Headers.Add("Authorization", "Basic " + encoded);
+          Name = patientInfo.Name,
+          Surname = patientInfo.Surname,
+          Bday = patientInfo.Bday,
+          Sex = patientInfo.Sex,
+          Classifiers = testIDs
+        };
 
-          var OrderDetails = new OrderedDto
-          {
-            Name = patientInfo.Name,
-            Surname = patientInfo.Surname,
-            Bday = patientInfo.Bday,
-            Sex = patientInfo.Sex,
-            Classifiers = testIDs
-          };
+        var json = JsonConvert.SerializeObject(OrderDetails);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+        var result = httpClient.PostAsync(url, content).Result;
 
-          var json = JsonConvert.SerializeObject(OrderDetails);
+        //return result; //NEVEIKIA
+        return null;
 
-          request.Content = new StringContent(json, Encoding.UTF8, "application/json");
 
-          var atsakymas = await httpClient.SendAsync(request);
-        }
       }
     }
-}
+  }
 }
