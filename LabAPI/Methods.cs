@@ -53,6 +53,7 @@ namespace LabAPI.Methods
         using (var request = new HttpRequestMessage(new HttpMethod("POST"), url))
         {
           request.Headers.Add("Authorization", "Basic " + encoded);
+          request.Content = new StringContent(json, Encoding.UTF8, "application/json");
 
           var OrderDetails = new OrderedDto
           {
@@ -64,9 +65,6 @@ namespace LabAPI.Methods
           };
 
           var json = JsonConvert.SerializeObject(OrderDetails);
-
-          request.Content = new StringContent(json, Encoding.UTF8, "application/json");
-
           var atsakymas = await httpClient.SendAsync(request);
         }
       }
